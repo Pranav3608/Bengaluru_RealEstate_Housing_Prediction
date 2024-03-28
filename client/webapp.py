@@ -2,18 +2,17 @@ import streamlit as st
 import requests
 from pydantic import BaseModel
 
-# Define the PredictionRequest model
+#PredictionRequest model
 class PredictionRequest(BaseModel):
     total_sqft: float
     location: str
     bhk: int
     bath: int
 
-# Streamlit app title
 st.title('Bengaluru Real Estate Price Prediction')
 st.text("Trouble buying & Selling property in Bengaluru? We got you covered!")
 
-# Input fields for total square feet, BHK, and bathrooms
+# Input fields
 total_sqft = st.number_input('Property Size')
 bhk = st.number_input('Select BHK')
 bath = st.number_input('Number of Bathrooms')
@@ -26,7 +25,7 @@ if response.status_code == 200:
 else:
     st.error('Error fetching locations.')
 
-# Button to trigger prediction
+#Button to trigger prediction
 if st.button('Predict'):
     # Prepare the request data
     request_data = PredictionRequest(
@@ -36,10 +35,10 @@ if st.button('Predict'):
         bath=bath
     )
     
-    # Send request to FastAPI server for prediction
+    #request to FastAPI server for prediction
     response = requests.post('http://127.0.0.1:8000/predict_home_price', json=request_data.dict())
     
-    # Display prediction result
+    #Display result
     if response.status_code == 200:
         result = response.json()
         estimated_price = result['estimated_price']
