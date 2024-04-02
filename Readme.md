@@ -10,4 +10,3 @@ The project has been divided into 3 major phases:
 ## Usage
 To run the application, you will need to run the FastAPI server using uvicorn and then in a seperate terminal run the Streamlit application. Furthermore you can enter the details in the frontend application and predict Real Estate prices of your preferred location.
 
-
